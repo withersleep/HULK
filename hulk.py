@@ -88,8 +88,8 @@ def httpcall(url):
 	except urllib2.HTTPError, e:
 			#print e.code
 			set_flag(1)
-			print 'Response Code 500'
-			code=500
+			print 'Response Code 10000'
+			code=10000
 	except urllib2.URLError, e:
 			#print e.reason
 			sys.exit()
@@ -105,7 +105,7 @@ class HTTPThread(threading.Thread):
 		try:
 			while flag<2:
 				code=httpcall(url)
-				if (code==500) & (safe==1):
+				if (code==10000) & (safe==1):
 					set_flag(2)
 		except Exception, ex:
 			pass
@@ -139,7 +139,7 @@ else:
 			url = url + "/"
 		m = re.search('(https?\://)?([^/]*)/?.*', url)
 		host = m.group(2)
-		for i in range(500):
+		for i in range(10000):
 			t = HTTPThread()
 			t.start()
 		t = MonitorThread()
